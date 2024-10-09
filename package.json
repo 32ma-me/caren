@@ -6,9 +6,9 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "yarn run build && wrangler pages dev",
+    "preview": "yarn run build && wrangler dev",
     "postinstall": "nuxt prepare",
-    "deploy": "yarn run build && wrangler pages deploy",
+    "deploy": "yarn run build && wrangler deploy",
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
