@@ -17,12 +17,12 @@ export default defineNuxtConfig({
       },
       meta:[
         {property:"og:type",content:"website"},
-        {property:"og:site_name",content:"caren - 日程調整ツール"},
+        {property:"og:site_name",content:"caren - 予定調整ツール"},
         {property:"og:image",content:"/ogp.webp"}
       ],
       link:[
-        {rel:"icon",type:"image/png",href:"/favicon.ico",sizes:"48x48"},
-        {rel:"icon",type:"image/svg+xml",href:"/favicon.svg"}
+        {rel:"icon",type:"image/svg+xml",href:"/favicon.svg"},
+        {rel:"icon",type:"image/png",href:"/favicon.ico"}
       ]
     }
   },
