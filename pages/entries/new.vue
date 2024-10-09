@@ -2,9 +2,6 @@
 import {boolean,number,object,string,array,date} from "yup";
 import {format} from "date-fns";
 import type {Entry} from "@/interface/entry";
-useHead({
-    title:"新規項目"
-});
 const seoMeta={
     title:"新規項目",
     description:"独自の新しいUIを備え、様々なケースで簡単に使える、ユーザーフレンドリーな日程調整ツールです。",

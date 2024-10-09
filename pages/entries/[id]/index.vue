@@ -40,13 +40,10 @@ let entryData:Ref<Entry>=ref(res.data.value?{
         end:new Date(res.data.value.date.end)
     }
 }:{title:"",key:{salt:"",hash:""},author:"",date:{start:new Date(0),end:new Date()},data:[]});
-useHead({
+useSeoMeta({
     title:entryData.value.title!=""
     ?entryData.value.title
-    :"読み込み中…"
-});
-useSeoMeta({
-    title:entryData.value.title,
+    :"読み込み中…",
     description:entryData.value.description,
     ogTitle:entryData.value.title,
     ogDescription:entryData.value.description

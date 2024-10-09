@@ -41,7 +41,6 @@ const seoMeta={
     description:"独自の新しいUIを備え、様々なケースで簡単に使える、ユーザーフレンドリーな日程調整ツールです。",
 };
 useSeoMeta({
-    title:seoMeta.title,
     description:seoMeta.description,
     ogTitle:seoMeta.title,
     ogDescription:seoMeta.description
