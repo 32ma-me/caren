@@ -14,6 +14,7 @@ logs
 *.log
 
 # Misc
+._*
 .DS_Store
 .fleet
 .idea

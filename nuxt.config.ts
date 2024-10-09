@@ -9,6 +9,15 @@ export default defineNuxtConfig({
     }
   },
 
+  app:{
+    head:{
+      link:[
+        {rel:"icon",type:"image/png",href:"/favicon.ico",sizes:"48x48"},
+        {rel:"icon",type:"image/svg+xml",href:"/favicon.svg"}
+      ]
+    }
+  },
+
   nitro: {
     preset: "cloudflare_module",
     storage:{
