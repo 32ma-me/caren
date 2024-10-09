@@ -31,6 +31,11 @@ useHead({
     ?`${title} | caren`
     :"caren - 予定調整ツール"
 });
+const router=useRouter();
+const currentPath=computed(()=>`https://caren.32ma.me/${router.currentRoute.value.path}`);
+useSeoMeta({
+  ogUrl:currentPath
+})
 </script>
 <template>
   <header class="flex flex-end items-center h-min px-4 py-5 border border-transparent border-b-current backdrop-blur mb-4">

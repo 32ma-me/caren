@@ -45,6 +45,12 @@ useHead({
     ?entryData.value.title
     :"読み込み中…"
 });
+useSeoMeta({
+    title:entryData.value.title,
+    description:entryData.value.description,
+    ogTitle:entryData.value.title,
+    ogDescription:entryData.value.description
+});
 const matchList:Ref<string[]>=ref([]);
 const matchSchedule=()=>{
     matchList.value=[];
