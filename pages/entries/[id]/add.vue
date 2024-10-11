@@ -140,9 +140,9 @@ watch(state,(newState)=>{
     setTimeout(()=>{isLoadingState.value=false},700);
 },{deep:true});
 const openEditModal=(i:number)=>{
-    Object.assign(scheduleFormState,scheduleFormInitState);
+    Object.assign(scheduleFormState,{...scheduleFormInitState});
     if(state.schedule[i]){
-        Object.assign(scheduleFormState,state.schedule[i]);
+        Object.assign(scheduleFormState,{...state.schedule[i]});
     }
     isEditOpen.value=true;
     editScheduleTarget.value=i;

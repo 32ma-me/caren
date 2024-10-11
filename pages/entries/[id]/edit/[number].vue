@@ -135,9 +135,9 @@ async function editSchedule(){
 }
 const isConfirmOpen=ref(false),isEditOpen=ref(false),editScheduleTarget=ref(0);
 const openEditModal=(i:number)=>{
-    Object.assign(scheduleFormState,scheduleFormInitState);
+    Object.assign(scheduleFormState,{...scheduleFormInitState});
     if(state.schedule[i]){
-        Object.assign(scheduleFormState,state.schedule[i]);
+        Object.assign(scheduleFormState,{...state.schedule[i]});
     }
     isEditOpen.value=true;
     editScheduleTarget.value=i;
