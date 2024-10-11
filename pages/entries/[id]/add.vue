@@ -110,7 +110,7 @@ async function submitSchedule(){
         navigateTo(`/entries/${route.params.id}`);
     }catch(err){
         isRequestPending.value=false;
-        if(isError(err)){
+        if(err instanceof Error){
             toast.add({
                 icon:"i-ri-error-warning-line",
                 color:"red",

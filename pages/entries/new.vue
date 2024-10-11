@@ -63,7 +63,7 @@ async function createEntry(){
         navigateTo(`/entries/${res}`);
     }catch(err){
         isRequestPending.value=false;
-        if(isError(err)){
+        if(err instanceof Error){
             toast.add({
                 icon:"i-ri-error-warning-line",
                 color:"red",

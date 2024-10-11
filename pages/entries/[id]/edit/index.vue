@@ -82,7 +82,7 @@ async function editEntry(){
         navigateTo(`/entries/${route.params.id}`);
     }catch(err){
         isRequestPending.value=false;
-        if(isError(err)){
+        if(err instanceof Error){
             toast.add({
                 icon:"i-ri-error-warning-line",
                 color:"red",
@@ -117,7 +117,7 @@ async function deleteEntry(){
             navigateTo(`/`);
         }catch(err){
             isDeleteConfirmOpen.value=false;
-            if(isError(err)){
+            if(err instanceof Error){
                 toast.add({
                     icon:"i-ri-error-warning-line",
                     color:"red",
