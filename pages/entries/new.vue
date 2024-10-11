@@ -43,8 +43,10 @@ async function validate(){
             });
         }
 }
+const isRequestPending=ref(false);
 async function createEntry(){
     try{
+        isRequestPending.value=true;
         state.key=await hashPassword(state.key as string);
         const res=await $fetch(`/api/entries`,{
             method:"post",
@@ -60,7 +62,7 @@ async function createEntry(){
         localStorage.removeItem("newEntryFormState");
         navigateTo(`/entries/${res}`);
     }catch(err){
-        isConfirmOpen.value=false;
+        isRequestPending.value=false;
         if(isError(err)){
             toast.add({
                 icon:"i-ri-error-warning-line",
@@ -153,7 +155,7 @@ watch(state,(newState)=>{
                 <template #footer>
                     <p class="text-sm mb-3">「作成」をクリックすると、クリップボードに閲覧ページのリンクがコピーされます。</p>
                     <div class="flex flex-row gap-2">
-                        <UButton @click="createEntry" icon="i-ri-checkbox-circle-fill" size="md" class="text-base">作成</UButton>
+                        <UButton @click="createEntry" icon="i-ri-checkbox-circle-fill" size="md" class="text-base" :loading="isRequestPending">作成</UButton>
                         <UButton @click="isConfirmOpen=false" icon="i-ri-arrow-go-back-line" color="white" variant="solid" size="md" class="text-base">やめておく</UButton>
                     </div>
                 </template>

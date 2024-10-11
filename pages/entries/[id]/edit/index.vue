@@ -65,8 +65,10 @@ async function validate(){
             });
         }
 }
+const isRequestPending=ref(false);
 async function editEntry(){
     try{
+        isRequestPending.value=true;
         const res=await $fetch(`/api/entries/${route.params.id}`,{
             method:"put",
             body:state
@@ -79,7 +81,7 @@ async function editEntry(){
         });
         navigateTo(`/entries/${route.params.id}`);
     }catch(err){
-        isConfirmOpen.value=false;
+        isRequestPending.value=false;
         if(isError(err)){
             toast.add({
                 icon:"i-ri-error-warning-line",
@@ -186,7 +188,7 @@ async function deleteEntry(){
                         <p class="min-h-4">{{format(state.date.start,'yyy/M/d')}} - {{format(state.date.end,'yyy/M/d')}}</p>
                         <template #footer>
                             <div class="flex flex-row gap-2">
-                                <UButton @click="editEntry" icon="i-ri-checkbox-circle-fill" size="md" class="text-base">適用</UButton>
+                                <UButton @click="editEntry" icon="i-ri-checkbox-circle-fill" size="md" class="text-base" :loading="isRequestPending">適用</UButton>
                                 <UButton @click="isConfirmOpen=false" icon="i-ri-arrow-go-back-line" color="white" variant="solid" size="md" class="text-base">やめておく</UButton>
                             </div>
                         </template>

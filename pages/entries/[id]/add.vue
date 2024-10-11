@@ -91,8 +91,10 @@ async function validate(){
             });
         }
 }
+const isRequestPending=ref(false);
 async function submitSchedule(){
     try{
+        isRequestPending.value=true;
         state.key=await hashPassword(state.key as string);
         const res=await $fetch(`/api/entries/${route.params.id}`,{
             method:"post",
@@ -107,7 +109,7 @@ async function submitSchedule(){
         localStorage.removeItem("scheduleFormState");
         navigateTo(`/entries/${route.params.id}`);
     }catch(err){
-        isConfirmOpen.value=false;
+        isRequestPending.value=false;
         if(isError(err)){
             toast.add({
                 icon:"i-ri-error-warning-line",
@@ -357,7 +359,7 @@ const openEditModal=(i:number)=>{
                 </ul>
                 <template #footer>
                     <div class="flex flex-row gap-2">
-                        <UButton @click="submitSchedule" icon="i-ri-checkbox-circle-fill" size="md" class="text-base">登録</UButton>
+                        <UButton @click="submitSchedule" icon="i-ri-checkbox-circle-fill" size="md" class="text-base" :loading="isRequestPending">登録</UButton>
                         <UButton @click="isConfirmOpen=false" icon="i-ri-arrow-go-back-line" color="white" variant="solid" size="md" class="text-base">やめておく</UButton>
                     </div>
                 </template>
