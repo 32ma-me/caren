@@ -95,10 +95,13 @@ const isRequestPending=ref(false);
 async function submitSchedule(){
     try{
         isRequestPending.value=true;
-        state.key=await hashPassword(state.key as string);
-        const res=await $fetch(`/api/entries/${route.params.id}`,{
+        const key=await hashPassword(state.key as string);
+        const res=await $fetch(`/api/entries`,{
             method:"post",
-            body:state
+            body:{
+                ...state,
+                key:key
+            }
         });
         isConfirmOpen.value=false;
         toast.add({

@@ -47,10 +47,13 @@ const isRequestPending=ref(false);
 async function createEntry(){
     try{
         isRequestPending.value=true;
-        state.key=await hashPassword(state.key as string);
+        const key=await hashPassword(state.key as string);
         const res=await $fetch(`/api/entries`,{
             method:"post",
-            body:state
+            body:{
+                ...state,
+                key:key
+            }
         });
         isConfirmOpen.value=false;
         useCopyToClipboard().copy(`https://caren.32ma.me/entries/${res}`);
