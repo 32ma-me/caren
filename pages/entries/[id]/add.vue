@@ -62,7 +62,7 @@ const state:EntryUserData=reactive({
     name:"",
     comment:"",
     key:"",
-    empty:false,
+    empty:true,
     schedule:[]
 });
 const scheduleFormState:EntryUserSchedule=reactive({
