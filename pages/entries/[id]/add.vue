@@ -96,7 +96,7 @@ async function submitSchedule(){
     try{
         isRequestPending.value=true;
         const key=await hashPassword(state.key as string);
-        const res=await $fetch(`/api/entries`,{
+        const res=await $fetch(`/api/entries/${route.params.id}`,{
             method:"post",
             body:{
                 ...state,
