@@ -91,7 +91,30 @@ const matchSchedule=()=>{
                 prev=flag;
             });
     })
+    updateColumns();
 };
+const containerRef=ref<HTMLElement|null>(null),listColumns=ref(1),
+updateColumns=()=>{
+    listColumns.value=1;
+    if(containerRef.value){
+        const width=containerRef.value.clientWidth;
+        const singleHeight=matchList.value.length*24;
+        let height=singleHeight;
+        while(listColumns.value<Math.floor(width/220)){
+            height=singleHeight/listColumns.value;
+            console.log(height,singleHeight,window.innerHeight*0.6);
+            if(height<=window.innerHeight*0.6){break}
+            listColumns.value++;
+        }
+    }
+};
+onMounted(()=>{
+    window.addEventListener("resize", updateColumns);
+    updateColumns();
+});
+onUnmounted(()=>{
+    window.removeEventListener("resize",updateColumns);
+})
 watch(()=>res.data.value,(respData)=>{
     if(respData){
         entryData.value={
@@ -104,6 +127,7 @@ watch(()=>res.data.value,(respData)=>{
         entryData.value.data=entryData.value.data.map((data)=>parseDate(data));
         if(entryData.value.data.length>0){matchSchedule()}
         setTimeout(()=>{isLoading.value=false;},300);
+        setTimeout(()=>{updateColumns();},303);
     }else{
         isLoading.value=true;
         if(isWatchedOnce){
@@ -131,9 +155,11 @@ watch(()=>res.data.value,(respData)=>{
                 <p class="min-h-4">{{entryData.description}}</p>
                 <h2 class="text-2xl font-semibold my-2">空き日程</h2>
                 <p v-if="entryData.data.length==0">(まだ誰も予定を入力していません)</p>
-                <ul class="pl-6">
-                    <li class="list-disc" v-for="match in matchList">{{match}}</li>
-                </ul>
+                <div class="max-h-[60vh] overflow-y-auto" ref="containerRef">
+                    <ul class="pl-6 break-inside-avoid-column gap-x-8 w-fit" :style="`column-count:${listColumns}`">
+                        <li class="list-disc w-48" v-for="match in matchList">{{match}}</li>
+                    </ul>
+                </div>
                 <h2 class="text-2xl font-semibold my-2">参加者の予定</h2>
                 <p v-if="entryData.data.length==0">(まだ誰も入力していません)</p>
                 <div v-for="data,i in entryData.data">
