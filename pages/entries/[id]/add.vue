@@ -145,15 +145,15 @@ watch(state,(newState)=>{
 const openEditModal=(i:number)=>{
     Object.assign(scheduleFormState,{...scheduleFormInitState});
     if(state.schedule[i]){
-        Object.assign(scheduleFormState,{...state.schedule[i]});
+        Object.assign(scheduleFormState,parseDate(JSON.parse(JSON.stringify(stringifyDate(state.schedule[i])))));
     }
     isEditOpen.value=true;
     editScheduleTarget.value=i;
 },applyEditingScheduleItem=(i:number)=>{
     if(state.schedule[i]){
-        Object.assign(state.schedule[i],{...scheduleFormState})
+        Object.assign(state.schedule[i],parseDate(JSON.parse(JSON.stringify(stringifyDate(scheduleFormState)))));
     }else{
-        state.schedule.push({...scheduleFormState});
+        state.schedule.push(parseDate(JSON.parse(JSON.stringify(stringifyDate(scheduleFormState)))));
     }
     isEditOpen.value=false;
 },importJSON=async()=>{
